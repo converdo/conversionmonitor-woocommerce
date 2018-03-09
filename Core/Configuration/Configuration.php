@@ -14,14 +14,39 @@ class Configuration
      */
     const VERSION = '3.0.0.0';
 
+    /**
+     * The name of the plugin.
+     *
+     * @var string
+     */
     protected $plugin;
 
+    /**
+     * The namespace name of the platform.
+     *
+     * @var string
+     */
     protected $platform;
 
+    /**
+     * The absolute path to the platform directory.
+     *
+     * @var string
+     */
     protected $basePath;
 
+    /**
+     * The absolute path to the plugin directory.
+     *
+     * @var string
+     */
     protected $path;
 
+    /**
+     * The environment name
+     *
+     * @var string
+     */
     protected $environment;
 
     /**

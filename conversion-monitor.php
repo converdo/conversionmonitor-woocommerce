@@ -13,15 +13,15 @@
 
 function conversionmonitor_add_integration($integrations)
 {
-	global $woocommerce;
+    global $woocommerce;
 
-	if (is_object($woocommerce) && version_compare($woocommerce->version, '2.1-beta-1', '>=')) {
-		include_once(__DIR__ . '/Woocommerce/resources/includes/conversion-monitor.php');
+    if (is_object($woocommerce) && version_compare($woocommerce->version, '2.1-beta-1', '>=')) {
+        include_once(__DIR__ . '/Woocommerce/resources/includes/conversion-monitor.php');
 
-		$integrations[] = 'WC_ConversionMonitor';
-	}
+        $integrations[] = 'WC_ConversionMonitor';
+    }
 
-	return $integrations;
+    return $integrations;
 }
 
 add_filter('woocommerce_integrations', 'conversionmonitor_add_integration');
