@@ -2,7 +2,7 @@
 
 namespace Converdo\ConversionMonitor\Woocommerce\Controllers;
 
-use Converdo\Common\Controllers\BaseInformationController;
+use Converdo\ConversionMonitor\Core\Controllers\BaseInformationController;
 
 class InformationController extends BaseInformationController
 {
