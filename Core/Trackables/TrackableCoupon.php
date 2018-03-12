@@ -37,7 +37,7 @@ class TrackableCoupon implements Renderable
      */
     public function setCoupon($coupon)
     {
-        $this->coupon = (string) $coupon;
+        $this->coupon = trim($coupon);
 
         return $this;
     }
@@ -152,7 +152,7 @@ class TrackableCoupon implements Renderable
      */
     public function setType(CouponType $type)
     {
-        $this->type = $type->name();
+        $this->type = $type;
 
         return $this;
     }
@@ -181,11 +181,11 @@ class TrackableCoupon implements Renderable
     /**
      * Get the type of the coupon.
      *
-     * @return CouponType
+     * @return string
      */
     public function type()
     {
-        return $this->type;
+        return $this->type->name();
     }
 
     /**

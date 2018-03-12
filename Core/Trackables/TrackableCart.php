@@ -18,42 +18,42 @@ class TrackableCart implements Renderable
      *
      * @var float
      */
-    protected $subtotal;
+    protected $subtotal = 0;
 
     /**
      * The total value of the cart.
      *
      * @var float
      */
-    protected $total;
+    protected $total = 0;
 
     /**
      * The tax value of the cart.
      *
      * @var float
      */
-    protected $tax;
+    protected $tax = 0;
 
     /**
      * The shipping value of the cart.
      *
      * @var float
      */
-    protected $shipping;
+    protected $shipping = 0;
 
     /**
      * The discount value of the cart.
      *
      * @var float
      */
-    protected $discount;
+    protected $discount = 0;
 
     /**
      * The names of the applied coupons.
      *
      * @var TrackableCoupon[]
      */
-    protected $coupons;
+    protected $coupons = [];
 
     /**
      * Set the cart products.

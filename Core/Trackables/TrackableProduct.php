@@ -85,7 +85,7 @@ class TrackableProduct implements Renderable
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = trim($name);
 
         return $this;
     }
@@ -108,7 +108,7 @@ class TrackableProduct implements Renderable
      */
     public function setSku($sku)
     {
-        $this->sku = (string) $sku;
+        $this->sku = trim($sku);
 
         return $this;
     }
@@ -223,7 +223,7 @@ class TrackableProduct implements Renderable
      */
     public function setImage($image)
     {
-        $this->image = (string) $image;
+        $this->image = $image;
 
         return $this;
     }
@@ -246,7 +246,7 @@ class TrackableProduct implements Renderable
      */
     public function setType(ProductType $type)
     {
-        $this->type = $type->name();
+        $this->type = $type;
 
         return $this;
     }
@@ -275,11 +275,11 @@ class TrackableProduct implements Renderable
     /**
      * Get the type of the product.
      *
-     * @return ProductType
+     * @return string
      */
     public function type()
     {
-        return $this->type;
+        return $this->type->name();
     }
 
     /**

@@ -24,7 +24,7 @@ class Configuration
     /**
      * The namespace name of the platform.
      *
-     * @var string
+     * @var PlatformConfigurable|string
      */
     protected $platform;
 
@@ -43,9 +43,9 @@ class Configuration
     protected $path;
 
     /**
-     * The environment name
+     * The environment configuration
      *
-     * @var string
+     * @var array
      */
     protected $environment;
 

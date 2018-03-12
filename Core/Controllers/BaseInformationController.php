@@ -1,6 +1,6 @@
 <?php
 
-namespace Converdo\Common\Controllers;
+namespace Converdo\ConversionMonitor\Core\Controllers;
 
 class BaseInformationController
 {

@@ -200,7 +200,7 @@ class TrackableOrder implements Renderable
      */
     public function setDiscount($discount)
     {
-        $this->discount = (float) $discount;
+        $this->discount = (float) abs($discount);
 
         return $this;
     }
@@ -269,7 +269,7 @@ class TrackableOrder implements Renderable
      */
     public function setType(OrderType $type)
     {
-        $this->type = $type->name();
+        $this->type = $type;
 
         return $this;
     }
@@ -298,11 +298,11 @@ class TrackableOrder implements Renderable
     /**
      * Get the order status type of the product.
      *
-     * @return OrderType
+     * @return string
      */
     public function type()
     {
-        return $this->type;
+        return $this->type->name();
     }
 
     /**

@@ -50,7 +50,7 @@ class TrackablePage implements Renderable
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = trim($name);
 
         return $this;
     }
@@ -73,7 +73,7 @@ class TrackablePage implements Renderable
      */
     public function setUrl($url)
     {
-        $this->url = (string) $url;
+        $this->url = trim($url);
 
         return $this;
     }
