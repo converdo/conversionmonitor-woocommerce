@@ -47,7 +47,7 @@ class CouponFactory extends BaseCouponFactory
     {
         return $this->model
                     ->setCoupon($this->coupon->get_code())
-                    ->setAmount($this->handleAmount())
+                    ->setAmount($this->cart->get_discount_total())
                     ->setMinimumCartTotal($this->coupon->get_minimum_amount())
                     ->setMaximumCartTotal($this->coupon->get_maximum_amount())
                     ->setFreeShipping($this->coupon->get_free_shipping())
@@ -71,23 +71,5 @@ class CouponFactory extends BaseCouponFactory
             default:
                 return new PercentageProductType();
         }
-    }
-
-    /**
-     * Get the total discount amount.
-     *
-     * @return float
-     */
-    protected function handleAmount()
-    {
-        $items = 0;
-
-        foreach ($this->cart->get_cart_contents() as $product) {
-            $items += $product['quantity'];
-        }
-
-        $limit = $this->coupon->get_limit_usage_to_x_items() ?: $items;
-
-        return (float) $this->coupon->get_amount() * $limit;
     }
 }
