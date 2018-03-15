@@ -41,31 +41,8 @@ class PageFactory extends BasePageFactory
     {
         return $this->model
                     ->setType($this->handlePageType())
-                    ->setName($this->handlePageTitle())
                     ->setUrl($this->handleRequestUrl())
                     ->setLanguageCode($this->handleLocale());
-    }
-
-    /**
-     * Get the page title.
-     *
-     * @return string
-     */
-    protected function handlePageTitle()
-    {
-        if ($this->model->isOfType(new CategoryPage())) {
-            return $this->query->queried_object->name;
-        }
-
-        if ($this->model->isOfType(new HomePage())) {
-            return get_option('blogname');
-        }
-
-        if ($this->model->isOfType(new SearchPage())) {
-            return $this->query->query['s'];
-        }
-
-        return $this->query->post->post_title ?: $this->query->post->label;
     }
 
     /**

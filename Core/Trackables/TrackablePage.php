@@ -8,13 +8,6 @@ use Converdo\ConversionMonitor\Core\Enumerables\PageType;
 class TrackablePage implements Renderable
 {
     /**
-     * The name of the page.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * The url of the page.
      *
      * @var string
@@ -36,34 +29,18 @@ class TrackablePage implements Renderable
     protected $languageCode;
 
     /**
+     * The source URL of the visitor.
+     *
+     * @var string
+     */
+    protected $sourceUrl;
+
+    /**
      * The type of the page.
      *
      * @var PageType
      */
     protected $type;
-
-    /**
-     * Set the name of the page.
-     *
-     * @param  string       $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = trim($name);
-
-        return $this;
-    }
-
-    /**
-     * Get the name of the page.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
 
     /**
      * Set the url of the page.
@@ -135,6 +112,29 @@ class TrackablePage implements Renderable
     }
 
     /**
+     * Set the source URL of the visitor.
+     *
+     * @param  string       $url
+     * @return $this
+     */
+    public function setSourceUrl($url)
+    {
+        $this->sourceUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the source URL of the visitor.
+     *
+     * @return string
+     */
+    public function source()
+    {
+        return $this->sourceUrl;
+    }
+
+    /**
      * Set the type of the page.
      *
      * @param  PageType     $type
@@ -184,8 +184,8 @@ class TrackablePage implements Renderable
     public function render()
     {
         return [
-            'na' => $this->name(),
             'ur' => $this->url(),
+            'su' => $this->source(),
             'ty' => $this->type(),
             'me' => [
                 'co' => $this->httpStatusCode(),
