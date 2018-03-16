@@ -88,7 +88,7 @@ class PageFactory extends BasePageFactory
             return new AccountPage();
         } elseif (is_search()) {
             return new SearchPage();
-        } elseif (is_shop() || is_home()) {
+        } elseif (is_shop() || is_home() || is_front_page()) {
             return new HomePage();
         }
 
