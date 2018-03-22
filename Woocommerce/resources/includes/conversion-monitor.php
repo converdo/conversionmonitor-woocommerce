@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../../../Core/bootstrap.php';
-require_once __DIR__ . '/../../../../../../vendor/autoload.php';
 
 class WC_ConversionMonitor extends WC_Integration
 {
@@ -88,7 +87,7 @@ class WC_ConversionMonitor extends WC_Integration
                 'options' => $this->getAttributeArray(),
             ],
             'conversionmonitor_attribute_set' => [
-                'title' => __('Attribute Set', 'conversionmonitor'),
+                'title' => __('Product Group', 'conversionmonitor'),
                 'type' => 'select',
                 'options' => $this->getAttributeArray(),
             ],
@@ -196,11 +195,11 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Get the attribute set.
+     * Get the group attribute set.
      *
      * @return string
      */
-    public static function getSetAttribute()
+    public static function getGroupAttribute()
     {
         return self::$attributes['set'];
     }

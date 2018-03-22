@@ -53,6 +53,8 @@ class ProductFactory extends BaseProductFactory
                     ->setSku($this->product->get_sku())
                     ->setPrice($this->product->get_price())
                     ->setBrand($this->handleManufacturerString())
+                    ->setAttributes($this->product->get_attribute(WC_ConversionMonitor::getGroupAttribute()))
+                    ->setCost($this->product->get_attribute(WC_ConversionMonitor::getCostPriceAttribute()))
                     ->setImage($this->handleImageUrlString())
                     ->setType($this->handleProductType())
                     ->setCategories($this->handleCategories())
