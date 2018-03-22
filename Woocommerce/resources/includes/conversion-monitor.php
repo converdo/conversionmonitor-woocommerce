@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../../Core/bootstrap.php';
+require_once __DIR__ . '/../../../../../../vendor/autoload.php';
 
 class WC_ConversionMonitor extends WC_Integration
 {
@@ -40,6 +41,13 @@ class WC_ConversionMonitor extends WC_Integration
     protected static $user;
 
     /**
+     * The attribute options.
+     *
+     * @var array
+     */
+    protected static $attributes = [];
+
+    /**
      * Initialise Settings Form Fields
      *
      * @access public
@@ -49,25 +57,40 @@ class WC_ConversionMonitor extends WC_Integration
     {
         $this->form_fields = [
             'conversionmonitor_enabled' => [
-                'title'             => __('Enable', 'conversionmonitor'),
-                'type'              => 'checkbox',
-                'checkboxgroup'     => 'start',
-                'default'           => ($this->enabled()) ? 'no' : 'yes',
+                'title' => __('Enable', 'conversionmonitor'),
+                'type' => 'checkbox',
+                'checkboxgroup' => 'start',
+                'default' => ($this->enabled()) ? 'no' : 'yes',
             ],
             'conversionmonitor_website' => [
-                'title'             => __('Website Token', 'conversionmonitor'),
-                'type'              => 'text',
-                'placeholder'       => 'WS_',
+                'title' => __('Website Token', 'conversionmonitor'),
+                'type' => 'text',
+                'placeholder' => 'WS_',
             ],
             'conversionmonitor_encryption' => [
-                'title'             => __('Encryption Token', 'conversionmonitor'),
-                'type'              => 'text',
-                'placeholder'       => 'EC_',
+                'title' => __('Encryption Token', 'conversionmonitor'),
+                'type' => 'text',
+                'placeholder' => 'EC_',
             ],
             'conversionmonitor_user' => [
-                'title'             => __('User Token', 'conversionmonitor'),
-                'type'              => 'text',
-                'placeholder'       => 'US_',
+                'title' => __('User Token', 'conversionmonitor'),
+                'type' => 'text',
+                'placeholder' => 'US_',
+            ],
+            'conversionmonitor_attribute_brand' => [
+                'title' => __('Brand Attribute', 'conversionmonitor'),
+                'type' => 'select',
+                'options' => $this->getAttributeArray(),
+            ],
+            'conversionmonitor_attribute_costprice' => [
+                'title' => __('Cost Price Attribute', 'conversionmonitor'),
+                'type' => 'select',
+                'options' => $this->getAttributeArray(),
+            ],
+            'conversionmonitor_attribute_set' => [
+                'title' => __('Attribute Set', 'conversionmonitor'),
+                'type' => 'select',
+                'options' => $this->getAttributeArray(),
             ],
         ];
     }
@@ -86,10 +109,19 @@ class WC_ConversionMonitor extends WC_Integration
         $this->init_form_fields();
         $this->init_settings();
 
-        self::$isEnabled = $this->get_option('conversionmonitor_enabled');
-        self::$website = $this->get_option('conversionmonitor_website');
-        self::$encryption = $this->get_option('conversionmonitor_encryption');
-        self::$user = $this->get_option('conversionmonitor_user');
+        static::$isEnabled = $this->get_option('conversionmonitor_enabled');
+
+        static::$website = $this->get_option('conversionmonitor_website');
+
+        static::$encryption = $this->get_option('conversionmonitor_encryption');
+
+        static::$user = $this->get_option('conversionmonitor_user');
+
+        static::$attributes['brand'] = $this->get_option('conversionmonitor_attribute_brand');
+
+        static::$attributes['cost_price'] = $this->get_option('conversionmonitor_attribute_costprice');
+
+        static::$attributes['set'] = $this->get_option('conversionmonitor_attribute_set');
 
         $this->actions();
     }
@@ -104,7 +136,7 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Gets whether the Conversion Monitor plugin is enabled.
+     * Get whether the Conversion Monitor plugin is enabled.
      *
      * @return bool
      */
@@ -114,7 +146,7 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Gets the website token.
+     * Get the website token.
      *
      * @return string
      */
@@ -124,7 +156,7 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Gets the encryption token.
+     * Get the encryption token.
      *
      * @return string
      */
@@ -134,13 +166,43 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Gets the User token.
+     * Get the user token.
      *
      * @return string
      */
     public static function getUserToken()
     {
         return self::$user;
+    }
+
+    /**
+     * Get the brand attribute.
+     *
+     * @return string
+     */
+    public static function getBrandAttribute()
+    {
+        return self::$attributes['brand'];
+    }
+
+    /**
+     * Get the cost price attribute.
+     *
+     * @return string
+     */
+    public static function getCostPriceAttribute()
+    {
+        return self::$attributes['cost_price'];
+    }
+
+    /**
+     * Get the attribute set.
+     *
+     * @return string
+     */
+    public static function getSetAttribute()
+    {
+        return self::$attributes['set'];
     }
 
     /**
@@ -164,5 +226,22 @@ class WC_ConversionMonitor extends WC_Integration
     {
         include_once(__DIR__ . '/../views/administration.php');
     }
-}
 
+    /**
+     * Get the attributes array.
+     *
+     * @return array
+     */
+    protected function getAttributeArray()
+    {
+        $attributes = [
+            0 => '➖ Disabled',
+        ];
+
+        foreach (wc_get_attribute_taxonomies() as $attribute) {
+            $attributes["pa_{$attribute->attribute_name}"] = $attribute->attribute_label;
+        }
+
+        return $attributes;
+    }
+}

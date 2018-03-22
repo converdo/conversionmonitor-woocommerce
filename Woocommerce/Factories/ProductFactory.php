@@ -11,6 +11,7 @@ use Converdo\ConversionMonitor\Core\Enumerables\Products\VirtualProduct;
 use Converdo\ConversionMonitor\Core\Enumerables\Products\VoucherProduct;
 use Converdo\ConversionMonitor\Core\Enumerables\ProductType;
 use Converdo\ConversionMonitor\Core\Factories\BaseProductFactory;
+use WC_ConversionMonitor;
 use WC_Product;
 
 class ProductFactory extends BaseProductFactory
@@ -65,7 +66,9 @@ class ProductFactory extends BaseProductFactory
      */
     protected function handleManufacturerString()
     {
-        if (! $manufacturers = array_filter(explode(',', $this->product->get_attribute('pa_man')))) {
+        $manufacturers = $this->product->get_attribute(WC_ConversionMonitor::getBrandAttribute());
+
+        if (! $manufacturers = array_filter(explode(',', $manufacturers))) {
             return null;
         }
 

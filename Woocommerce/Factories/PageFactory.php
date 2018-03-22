@@ -41,20 +41,7 @@ class PageFactory extends BasePageFactory
     {
         return $this->model
                     ->setType($this->handlePageType())
-                    ->setUrl($this->handleRequestUrl())
                     ->setLanguageCode($this->handleLocale());
-    }
-
-    /**
-     * Build the requested page URL, ignore query parameters.
-     *
-     * @return string
-     */
-    protected function handleRequestUrl()
-    {
-        $path = current(explode('?', $_SERVER['REQUEST_URI'], 2));
-
-        return "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}{$path}";
     }
 
     /**

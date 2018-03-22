@@ -14,12 +14,32 @@ class TrackableCoupon implements Renderable
      */
     protected $coupon;
 
+    /**
+     * The discount amount of the coupon.
+     *
+     * @var float
+     */
     protected $amount;
 
+    /**
+     * The minimum cart total amount of the coupon.
+     *
+     * @var float
+     */
     protected $minimumCartTotal;
 
+    /**
+     * The maximum cart total amount of the coupon.
+     *
+     * @var float
+     */
     protected $maximumCartTotal;
 
+    /**
+     * Whether the coupon enables free shipping.
+     *
+     * @var bool
+     */
     protected $freeShipping = false;
 
     /**

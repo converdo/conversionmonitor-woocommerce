@@ -15,18 +15,18 @@ class TrackableOrder implements Renderable
     protected $identifier;
 
     /**
-     * The subtotal value of the cart.
-     *
-     * @var float
-     */
-    protected $subtotal;
-
-    /**
      * The total value of the cart.
      *
      * @var float
      */
     protected $total;
+
+    /**
+     * The subtotal value of the cart.
+     *
+     * @var float
+     */
+    protected $subtotal;
 
     /**
      * The tax value of the cart.
@@ -101,29 +101,6 @@ class TrackableOrder implements Renderable
     }
 
     /**
-     * Set the subtotal value of the order.
-     *
-     * @param  float        $subtotal
-     * @return $this
-     */
-    public function setSubtotal($subtotal)
-    {
-        $this->subtotal = (float) $subtotal;
-
-        return $this;
-    }
-
-    /**
-     * Get the subtotal value of the order.
-     *
-     * @return float
-     */
-    public function subtotal()
-    {
-        return $this->subtotal;
-    }
-
-    /**
      * Set the total value of the order.
      *
      * @param  float        $total
@@ -131,7 +108,7 @@ class TrackableOrder implements Renderable
      */
     public function setTotal($total)
     {
-        $this->total = (float) $total;
+        $this->total = round($total, 2);
 
         return $this;
     }
@@ -147,6 +124,29 @@ class TrackableOrder implements Renderable
     }
 
     /**
+     * Set the subtotal value of the order.
+     *
+     * @param  float        $subtotal
+     * @return $this
+     */
+    public function setSubtotal($subtotal)
+    {
+        $this->subtotal = round($subtotal, 2);
+
+        return $this;
+    }
+
+    /**
+     * Get the subtotal value of the order.
+     *
+     * @return float
+     */
+    public function subtotal()
+    {
+        return $this->subtotal;
+    }
+
+    /**
      * Set the tax value of the order.
      *
      * @param  float        $tax
@@ -154,7 +154,7 @@ class TrackableOrder implements Renderable
      */
     public function setTax($tax)
     {
-        $this->tax = (float) $tax;
+        $this->tax = round($tax, 2);
 
         return $this;
     }
@@ -177,7 +177,7 @@ class TrackableOrder implements Renderable
      */
     public function setShipping($shipping)
     {
-        $this->shipping = (float) $shipping;
+        $this->shipping = round($shipping, 2);
 
         return $this;
     }
@@ -200,7 +200,7 @@ class TrackableOrder implements Renderable
      */
     public function setDiscount($discount)
     {
-        $this->discount = (float) abs($discount);
+        $this->discount = round(abs($discount), 2);
 
         return $this;
     }

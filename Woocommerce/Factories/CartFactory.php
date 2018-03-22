@@ -6,6 +6,7 @@ use Converdo\ConversionMonitor\Core\Factories\BaseCartFactory;
 use Converdo\ConversionMonitor\Core\Trackables\TrackableCoupon;
 use Converdo\ConversionMonitor\Core\Trackables\TrackableProduct;
 use WC_Cart;
+use WC_Coupon;
 
 class CartFactory extends BaseCartFactory
 {
@@ -67,7 +68,7 @@ class CartFactory extends BaseCartFactory
         $coupons = [];
 
         foreach ($this->cart->get_applied_coupons() as $coupon) {
-            $coupons[] = cvd_config()->platform()->coupon($this->cart, new \WC_Coupon($coupon));
+            $coupons[] = cvd_config()->platform()->coupon($this->cart, new WC_Coupon($coupon));
         }
 
         return $coupons;
