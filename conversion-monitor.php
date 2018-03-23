@@ -11,6 +11,12 @@
  * Version: 3.0.0.0
  */
 
+/**
+ * Add the Conversion Monitor integration for WooCommerce.
+ *
+ * @param  mixed        $integrations
+ * @return array
+ */
 function conversionmonitor_add_integration($integrations)
 {
     global $woocommerce;
@@ -29,8 +35,13 @@ add_action('woocommerce_checkout_order_processed', 'conversionmonitor_api_order_
 add_action('woocommerce_update_order', 'conversionmonitor_api_order_update', 10, 1);
 add_action('rest_api_init', 'conversionmonitor_controller');
 
-add_filter('plugin_action_links_conversion-monitor/conversion-monitor.php', function ($links) {
-
+/**
+ * Add a settings shortcut in the plugin list.
+ *
+ * @return array
+ */
+add_filter('plugin_action_links_conversion-monitor/conversion-monitor.php', function ($links)
+{
     $label = __( 'Settings' );
     $url = get_admin_url(null, 'admin.php?page=wc-settings&tab=integration&section=conversionmonitor');
 
@@ -39,7 +50,12 @@ add_filter('plugin_action_links_conversion-monitor/conversion-monitor.php', func
     return $links;
 });
 
-
+/**
+ * Send a created order to the Conversion Monitor.
+ *
+ * @param  string       $orderId
+ * @return void
+ */
 function conversionmonitor_api_order_new($orderId)
 {
     cvd_app()->make(\Converdo\ConversionMonitor\Core\API\API::class)->order_create(
@@ -47,6 +63,12 @@ function conversionmonitor_api_order_new($orderId)
     );
 }
 
+/**
+ * Send an updated order to the Conversion Monitor.
+ *
+ * @param  string       $orderId
+ * @return void
+ */
 function conversionmonitor_api_order_update($orderId)
 {
     cvd_app()->make(\Converdo\ConversionMonitor\Core\API\API::class)->order_update(
@@ -54,6 +76,11 @@ function conversionmonitor_api_order_update($orderId)
     );
 }
 
+/**
+ * Register the Conversion Monitor API route.
+ *
+ * @return void
+ */
 function conversionmonitor_controller() {
     register_rest_route('conversionmonitor', '/ping', array(
         'methods' => 'GET',

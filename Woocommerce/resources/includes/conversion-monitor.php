@@ -76,19 +76,29 @@ class WC_ConversionMonitor extends WC_Integration
                 'type' => 'text',
                 'placeholder' => 'US_',
             ],
+            'conversionmonitor_attributes_heading' => [
+                'title' => __('<h3 style="cursor:default">Product Attributes</h3>', 'conversionmonitor'),
+                'type' => 'hidden'
+            ],
             'conversionmonitor_attribute_brand' => [
-                'title' => __('Brand Attribute', 'conversionmonitor'),
+                'title' => __('Brand', 'conversionmonitor'),
                 'type' => 'select',
+                'desc_tip' => true,
+                'description' => __('The product brand or manufacturer name', 'conversionmonitor'),
                 'options' => $this->getAttributeArray(),
             ],
             'conversionmonitor_attribute_costprice' => [
-                'title' => __('Cost Price Attribute', 'conversionmonitor'),
+                'title' => __('Cost Price', 'conversionmonitor'),
                 'type' => 'select',
+                'desc_tip' => true,
+                'description' => __('The cost price of the product', 'conversionmonitor'),
                 'options' => $this->getAttributeArray(),
             ],
             'conversionmonitor_attribute_set' => [
                 'title' => __('Product Group', 'conversionmonitor'),
                 'type' => 'select',
+                'desc_tip' => true,
+                'description' => __('The descriptive term of the product', 'conversionmonitor'),
                 'options' => $this->getAttributeArray(),
             ],
         ];

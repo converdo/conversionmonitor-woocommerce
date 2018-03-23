@@ -61,9 +61,11 @@ class PageFactory extends BasePageFactory
      */
     protected function handlePageType()
     {
-        if (is_product()) {
+        if (is_front_page()) {
+            return new HomePage();
+        } elseif (is_product()) {
             return new ProductPage();
-        } elseif (is_product_category()) {
+        } elseif (is_product_category() || is_shop()) {
             return new CategoryPage();
         } elseif (is_cart()) {
             return new CartPage();
@@ -75,8 +77,6 @@ class PageFactory extends BasePageFactory
             return new AccountPage();
         } elseif (is_search()) {
             return new SearchPage();
-        } elseif (is_shop() || is_home() || is_front_page()) {
-            return new HomePage();
         }
 
         return new SeoPage();
