@@ -26,6 +26,8 @@ class Client
             curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/resources/api_cert_chain.pem');
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 2);
 
             if ($requestable->method() === 'POST') {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestable->payload()));

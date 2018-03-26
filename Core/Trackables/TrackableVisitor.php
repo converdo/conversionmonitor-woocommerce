@@ -28,6 +28,13 @@ class TrackableVisitor implements Renderable
     protected $ipAddress;
 
     /**
+     * Determine if the visitor is browsing via a proxy.
+     *
+     * @var bool
+     */
+    protected $isProxy = false;
+
+    /**
      * Set the referrer URL of the visitor.
      *
      * @param  string       $url
@@ -97,6 +104,29 @@ class TrackableVisitor implements Renderable
     }
 
     /**
+     * Set whether the visitor is browsing via a proxy.
+     *
+     * @param  bool         $proxy
+     * @return $this
+     */
+    public function setIsProxy($proxy)
+    {
+        $this->isProxy = (bool) $proxy;
+
+        return $this;
+    }
+
+    /**
+     * Get whether the visitor is browsing via a proxy.
+     *
+     * @return string
+     */
+    public function isProxy()
+    {
+        return $this->isProxy;
+    }
+
+    /**
      * @inheritdoc
      */
     public function render()
@@ -105,6 +135,7 @@ class TrackableVisitor implements Renderable
             'ur' => $this->referrer(),
             'ua' => $this->userAgent(),
             'ip' => $this->ip(),
+            'pr' => $this->isProxy(),
         ];
     }
 }
