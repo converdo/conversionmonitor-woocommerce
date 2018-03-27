@@ -45,6 +45,8 @@ class Client
 
             if (! isset($response['message'])) {
                 cvd_logger()->error("Something went wrong reading the response.");
+
+                return null;
             }
 
             cvd_logger()->info($response['message']);

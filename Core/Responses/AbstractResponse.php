@@ -1,6 +1,6 @@
 <?php
 
-namespace Converdo\Common\Responses;
+namespace Converdo\ConversionMonitor\Core\Responses;
 
 abstract class AbstractResponse
 {

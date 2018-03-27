@@ -34,7 +34,6 @@ class LogReader
 
         // Start reading
         $output = '';
-        $chunk = '';
 
         // While we would like more
         while (ftell($f) > 0 && $lines >= 0) {

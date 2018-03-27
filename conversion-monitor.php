@@ -42,7 +42,8 @@ add_action('rest_api_init', 'conversionmonitor_controller');
  */
 add_filter('plugin_action_links_conversion-monitor/conversion-monitor.php', function ($links)
 {
-    $label = __( 'Settings' );
+    $label = __('Settings');
+
     $url = get_admin_url(null, 'admin.php?page=wc-settings&tab=integration&section=conversionmonitor');
 
     $links[] = "<a href=\"{$url}\">{$label}</a>";
@@ -82,7 +83,7 @@ function conversionmonitor_api_order_update($orderId)
  * @return void
  */
 function conversionmonitor_controller() {
-    register_rest_route('conversionmonitor', '/ping', array(
+    register_rest_route('conversionmonitor', '/ping', [
         'methods' => 'GET',
         'callback' => function () {
             $controller = new \Converdo\ConversionMonitor\Woocommerce\Controllers\InformationController();
@@ -91,5 +92,5 @@ function conversionmonitor_controller() {
 
             return $response;
         }
-    ));
+    ]);
 }

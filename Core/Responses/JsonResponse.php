@@ -2,8 +2,6 @@
 
 namespace Converdo\ConversionMonitor\Core\Responses;
 
-use Converdo\Common\Controllers\AbstractResponse;
-
 class JsonResponse extends AbstractResponse
 {
     /**
