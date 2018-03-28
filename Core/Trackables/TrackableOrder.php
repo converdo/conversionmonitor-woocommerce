@@ -64,11 +64,11 @@ class TrackableOrder implements Renderable
     protected $gateway;
 
     /**
-     * The customer ip of the order.
+     * The customer of the order.
      *
-     * @var string
+     * @var TrackableCustomer
      */
-    protected $ip;
+    protected $customer;
 
     /**
      * The products of the order.
@@ -239,26 +239,26 @@ class TrackableOrder implements Renderable
     }
 
     /**
-     * Set the customer ip of the order.
+     * Set the customer of the order.
      *
-     * @param  string       $ip
+     * @param  TrackableCustomer        $customer
      * @return $this
      */
-    public function setCustomerIp($ip)
+    public function setCustomer(TrackableCustomer $customer)
     {
-        $this->ip = (string) $ip;
+        $this->customer = $customer;
 
         return $this;
     }
 
     /**
-     * Get the customer ip of the order.
+     * Get the customer of the order.
      *
-     * @return string
+     * @return TrackableCustomer
      */
-    public function ip()
+    public function customer()
     {
-        return $this->ip;
+        return $this->customer;
     }
 
     /**
@@ -354,7 +354,7 @@ class TrackableOrder implements Renderable
             'sh' => $this->shipping(),
             'ta' => $this->tax(),
             'gn' => $this->gateway(),
-            'ip' => $this->ip(),
+            'cu' => $this->customer()->render(),
             'ty' => $this->type(),
             'pr' => $this->handleProducts(),
         ];
@@ -373,6 +373,7 @@ class TrackableOrder implements Renderable
             $products[] = [
                 'sk' => $product->sku(),
                 'pr' => $product->price(),
+                'qu' => $product->quantity(),
             ];
         }
 

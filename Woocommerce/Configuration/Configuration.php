@@ -132,9 +132,9 @@ class Configuration implements PlatformConfigurable
     /**
      * @inheritdoc
      */
-    public function getProductFactory($product)
+    public function getProductFactory($product, $quantity = null)
     {
-        return new ProductFactory($product);
+        return new ProductFactory($product, $quantity);
     }
 
     /**

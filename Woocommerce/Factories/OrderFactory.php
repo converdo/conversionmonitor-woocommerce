@@ -7,6 +7,8 @@ use Converdo\ConversionMonitor\Core\Enumerables\Orders\CompletedType;
 use Converdo\ConversionMonitor\Core\Enumerables\Orders\PendingType;
 use Converdo\ConversionMonitor\Core\Enumerables\OrderType;
 use Converdo\ConversionMonitor\Core\Factories\BaseOrderFactory;
+use Converdo\ConversionMonitor\Core\Trackables\TrackableAddress;
+use Converdo\ConversionMonitor\Core\Trackables\TrackableCustomer;
 use WC_Order;
 
 class OrderFactory extends BaseOrderFactory
@@ -40,8 +42,8 @@ class OrderFactory extends BaseOrderFactory
                     ->setTax($this->order->get_total_tax())
                     ->setShipping($this->order->get_shipping_total())
                     ->setDiscount($this->order->get_discount_total())
-                    ->setGateway($this->order->get_payment_method_title())
-                    ->setCustomerIp($this->order->get_customer_ip_address())
+                    ->setGateway($this->order->get_payment_method())
+                    ->setCustomer($this->handleCustomer())
                     ->setType($this->handleOrderType())
                     ->setProducts($this->handleProducts());
     }
@@ -80,9 +82,40 @@ class OrderFactory extends BaseOrderFactory
         $products = [];
 
         foreach ($this->order->get_items() as $product) {
-            $products[] = cvd_config()->platform()->getProductFactory(wc_get_product($product->get_product_id()))->call();
+            $products[] = cvd_config()->platform()->getProductFactory(
+                wc_get_product($product->get_product_id()), $product->get_quantity()
+            )->call();
         }
 
         return $products;
+    }
+
+    /**
+     * Build the customer trackable instance.
+     *
+     * @return TrackableCustomer
+     */
+    protected function handleCustomer()
+    {
+        $billing = new TrackableAddress();
+        $billing->setAddress($this->order->get_billing_address_1());
+        $billing->setPostal($this->order->get_billing_postcode());
+        $billing->setCity($this->order->get_billing_city());
+        $billing->setCountry($this->order->get_billing_country());
+
+        $shipping = new TrackableAddress();
+        $shipping->setAddress($this->order->get_shipping_address_1());
+        $shipping->setPostal($this->order->get_shipping_postcode());
+        $shipping->setCity($this->order->get_shipping_city());
+        $shipping->setCountry($this->order->get_shipping_country());
+
+        $customer = new TrackableCustomer();
+        $customer->setName("{$this->order->get_billing_first_name()} {$this->order->get_billing_last_name()}");
+        $customer->setEmail($this->order->get_billing_email());
+        $customer->setTelephone($this->order->get_billing_phone());
+        $customer->setBillingAddress($billing);
+        $customer->setShippingAddress($shipping);
+
+        return $customer;
     }
 }

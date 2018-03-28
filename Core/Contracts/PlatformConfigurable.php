@@ -105,9 +105,10 @@ interface PlatformConfigurable
      * Get the product factory instance.
      *
      * @param  mixed                $product
+     * @param  int|null             $quantity
      * @return BaseProductFactory
      */
-    public function getProductFactory($product);
+    public function getProductFactory($product, $quantity = null);
 
     /**
      * Determine if the current page is a category page.
