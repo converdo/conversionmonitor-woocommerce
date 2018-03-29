@@ -37,11 +37,11 @@ class OrderFactory extends BaseOrderFactory
     {
         return $this->model
                     ->setIdentifier($this->order->get_id())
-                    ->setSubtotal($this->order->get_subtotal())
                     ->setTotal($this->order->get_total('price'))
-                    ->setTax($this->order->get_total_tax())
+                    ->setSubtotal($this->order->get_subtotal())
                     ->setShipping($this->order->get_shipping_total())
                     ->setDiscount($this->order->get_discount_total())
+                    ->setTax($this->order->get_total_tax())
                     ->setGateway($this->order->get_payment_method())
                     ->setCustomer($this->handleCustomer())
                     ->setType($this->handleOrderType())

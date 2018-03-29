@@ -7,8 +7,10 @@ class OrderCreateRequest extends AbstractOrderRequest
     /**
      * @inheritdoc
      */
-    public function url()
+    public function payload()
     {
-        return cvd_config()->url('order_create.php');
+        return array_merge(parent::payload(), [
+            'type' => 'CREATED',
+        ]);
     }
 }

@@ -35,11 +35,20 @@ abstract class AbstractOrderRequest implements Requestable
     /**
      * @inheritdoc
      */
+    public function url()
+    {
+        return cvd_config()->url('collect_order');
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function payload()
     {
         return [
             'order' => $this->order->render(),
             'key' => cvd_config()->platform()->website(),
+            'identifier' => isset($_COOKIE['conversionmonitor_id']) ? $_COOKIE['conversionmonitor_id'] : null,
         ];
     }
 }
