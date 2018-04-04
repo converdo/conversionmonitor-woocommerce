@@ -34,6 +34,7 @@ add_filter('woocommerce_integrations', 'conversionmonitor_add_integration');
 add_action('woocommerce_checkout_order_processed', 'conversionmonitor_api_order_new', 10, 1);
 add_action('woocommerce_update_order', 'conversionmonitor_api_order_update', 10, 1);
 add_action('rest_api_init', 'conversionmonitor_controller');
+add_action('admin_head', 'conversionmonitor_admin_stylesheets');
 
 /**
  * Add a settings shortcut in the plugin list.
@@ -82,7 +83,8 @@ function conversionmonitor_api_order_update($orderId)
  *
  * @return void
  */
-function conversionmonitor_controller() {
+function conversionmonitor_controller()
+{
     register_rest_route('conversionmonitor', '/ping', [
         'methods' => 'GET',
         'callback' => function () {
@@ -93,4 +95,15 @@ function conversionmonitor_controller() {
             return $response;
         }
     ]);
+}
+
+/**
+ * Append a stylesheet to the administration panel.
+ *
+ * @return void
+ */
+function conversionmonitor_admin_stylesheets()
+{
+    wp_enqueue_style('admin_styles', cvd_config()->platform()->httpPath('Woocommerce/resources/assets/conversionmonitor.css'));
+    wp_enqueue_script('admin_styles', cvd_config()->platform()->httpPath('Woocommerce/resources/assets/conversionmonitor.js'));
 }

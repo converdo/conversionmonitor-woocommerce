@@ -284,4 +284,12 @@ class Configuration implements PlatformConfigurable
     {
         return trim(WP_CONTENT_DIR . "/plugins/conversion-monitor/{$path}");
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function httpPath($path = null)
+    {
+        return trim(WP_CONTENT_URL . "/plugins/conversion-monitor/{$path}");
+    }
 }

@@ -65,16 +65,19 @@ class WC_ConversionMonitor extends WC_Integration
                 'title' => __('Website Token', 'conversionmonitor'),
                 'type' => 'text',
                 'placeholder' => 'WS_',
+                'class' => 'conversionmonitor-input conversionmonitor-input-token',
             ],
             'conversionmonitor_encryption' => [
                 'title' => __('Encryption Token', 'conversionmonitor'),
                 'type' => 'text',
                 'placeholder' => 'EC_',
+                'class' => 'conversionmonitor-input conversionmonitor-input-token',
             ],
             'conversionmonitor_user' => [
                 'title' => __('User Token', 'conversionmonitor'),
                 'type' => 'text',
                 'placeholder' => 'US_',
+                'class' => 'conversionmonitor-input conversionmonitor-input-token',
             ],
             'conversionmonitor_attributes_heading' => [
                 'title' => __('<h3 style="cursor:default">Product Attributes</h3>', 'conversionmonitor'),
@@ -85,6 +88,7 @@ class WC_ConversionMonitor extends WC_Integration
                 'type' => 'select',
                 'desc_tip' => true,
                 'description' => __('The product brand or manufacturer name', 'conversionmonitor'),
+                'class' => 'conversionmonitor-input',
                 'options' => $this->getAttributeArray(),
             ],
             'conversionmonitor_attribute_costprice' => [
@@ -92,6 +96,7 @@ class WC_ConversionMonitor extends WC_Integration
                 'type' => 'select',
                 'desc_tip' => true,
                 'description' => __('The cost price of the product', 'conversionmonitor'),
+                'class' => 'conversionmonitor-input',
                 'options' => $this->getAttributeArray(),
             ],
             'conversionmonitor_attribute_set' => [
@@ -99,6 +104,7 @@ class WC_ConversionMonitor extends WC_Integration
                 'type' => 'select',
                 'desc_tip' => true,
                 'description' => __('The descriptive term of the product', 'conversionmonitor'),
+                'class' => 'conversionmonitor-input',
                 'options' => $this->getAttributeArray(),
             ],
         ];

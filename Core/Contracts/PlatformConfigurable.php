@@ -245,4 +245,12 @@ interface PlatformConfigurable
      * @return string
      */
     public function pluginPath($path = null);
+
+    /**
+     * Get the absolute url to the plugin root directory.
+     *
+     * @param  string|null      $path
+     * @return string
+     */
+    public function httpPath($path = null);
 }
