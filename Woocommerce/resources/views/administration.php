@@ -18,7 +18,7 @@
 <hr>
 <?php } ?>
 
-<table class="form-table">
+<table class="form-table" id="conversionmonitor-settings">
 	<?php $this->generate_settings_html(); ?>
 </table>
 

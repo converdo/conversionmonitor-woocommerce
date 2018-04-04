@@ -80,7 +80,7 @@ class WC_ConversionMonitor extends WC_Integration
                 'class' => 'conversionmonitor-input conversionmonitor-input-token',
             ],
             'conversionmonitor_attributes_heading' => [
-                'title' => __('<h3 style="cursor:default">Product Attributes</h3>', 'conversionmonitor'),
+                'title' => '<h3 style="cursor:default">' . __('Product Attributes', 'conversionmonitor') . '</h3>',
                 'type' => 'hidden'
             ],
             'conversionmonitor_attribute_brand' => [

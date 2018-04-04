@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Conversion Monitor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-04 09:16+0200\n"
+"PO-Revision-Date: 2018-04-04 15:13+0200\n"
+"Last-Translator: Converdo BV <info@converdo.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;"
+"__ngettext:1,2;__ngettext_noop:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;esc_attr__:1;"
+"esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;"
+"transChoice:1,2\n"
+"X-Loco-Target-Locale: nl_NL\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+msgid "Enable"
+msgstr "Inschakelen"
+
+msgid "Website Token"
+msgstr "Websitesleutel"
+
+msgid "Encryption Token"
+msgstr "Encryptiesleutel"
+
+msgid "User Token"
+msgstr "Gebruikerssleutel"
+
+msgid "Product Attributes"
+msgstr "Product-eigenschappen"
+
+msgid "Brand"
+msgstr "Merknaam"
+
+msgid "The product brand or manufacturer name"
+msgstr "De merk- of fabriekantsnaam"
+
+msgid "Cost Price"
+msgstr "Inkoopprijs"
+
+msgid "The cost price of the product"
+msgstr "De inkoopprijs van het product"
+
+msgid "Product Group"
+msgstr "Productgroep"
+
+msgid "The descriptive term of the product"
+msgstr "Beschrijvende term van het product"

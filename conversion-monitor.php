@@ -7,7 +7,7 @@
  * Author: Converdo BV
  * Text Domain: conversionmonitor
  * Author URI: https://www.conversionmonitor.com
- * Domain Path: /languages
+ * Domain Path: /Woocommerce/resources/languages
  * Version: 3.0.0.0
  */
 
@@ -31,6 +31,7 @@ function conversionmonitor_add_integration($integrations)
 }
 
 add_filter('woocommerce_integrations', 'conversionmonitor_add_integration');
+add_action('plugins_loaded', 'conversionmonitor_init');
 add_action('woocommerce_checkout_order_processed', 'conversionmonitor_api_order_new', 10, 1);
 add_action('woocommerce_update_order', 'conversionmonitor_api_order_update', 10, 1);
 add_action('rest_api_init', 'conversionmonitor_controller');
@@ -106,4 +107,9 @@ function conversionmonitor_admin_stylesheets()
 {
     wp_enqueue_style('admin_styles', cvd_config()->platform()->httpPath('Woocommerce/resources/assets/conversionmonitor.css'));
     wp_enqueue_script('admin_styles', cvd_config()->platform()->httpPath('Woocommerce/resources/assets/conversionmonitor.js'));
+}
+
+function conversionmonitor_init()
+{
+    load_plugin_textdomain('conversionmonitor', false, 'conversion-monitor/Woocommerce/resources/languages/');
 }
