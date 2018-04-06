@@ -31,6 +31,6 @@ class SearchFactory extends BaseSearchFactory
     {
         return $this->model
                     ->setTerm($this->query->query['s'])
-                    ->setResults($this->query->post_count);
+                    ->setResults($this->query->found_posts);
     }
 }
