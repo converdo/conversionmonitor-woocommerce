@@ -48,7 +48,7 @@ abstract class AbstractOrderRequest implements Requestable
         return [
             'order' => $this->order->render(),
             'key' => cvd_config()->platform()->website(),
-            'identifier' => isset($_COOKIE['conversionmonitor_id']) ? $_COOKIE['conversionmonitor_id'] : null,
+            'identifier' => isset($_COOKIE['conversionmonitor_uuid']) ? $_COOKIE['conversionmonitor_uuid'] : null,
         ];
     }
 }

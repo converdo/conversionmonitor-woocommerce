@@ -15,6 +15,13 @@ class TrackableOrder implements Renderable
     protected $identifier;
 
     /**
+     * The identifier name of the order.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
      * The total value of the cart.
      *
      * @var float
@@ -98,6 +105,29 @@ class TrackableOrder implements Renderable
     public function identifier()
     {
         return $this->identifier;
+    }
+
+    /**
+     * Set the identifier name of the order.
+     *
+     * @param  string       $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = (string) $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the identifier of the order.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->name;
     }
 
     /**
@@ -348,6 +378,7 @@ class TrackableOrder implements Renderable
     {
         return [
             'id' => $this->identifier(),
+            'na' => $this->name(),
             'to' => $this->total(),
             'st' => $this->subtotal(),
             'di' => $this->discount(),

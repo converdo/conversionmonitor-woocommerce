@@ -9,6 +9,7 @@ return [
     '/Woocommerce/Factories/CouponFactory',
     '/Woocommerce/Factories/OrderFactory',
     '/Woocommerce/Factories/PageFactory',
+    '/Woocommerce/Factories/PaymentGatewayFactory',
     '/Woocommerce/Factories/ProductFactory',
     '/Woocommerce/Factories/SearchFactory',
 

@@ -11,19 +11,19 @@ class BaseInformationController
      */
     public function information()
     {
-        $plugin = $this->getPluginInformation();
+        $plugin = $this->buildPluginInformation();
 
-        $logs = $this->getLogOutput();
+        $logs = $this->buildLogOutput();
 
         return array_filter(compact('plugin', 'logs'));
     }
 
     /**
-     * Get the plugin information.
+     * Build the public plugin information.
      *
      * @return array
      */
-    protected function getPluginInformation()
+    protected function buildPluginInformation()
     {
         return [
             'version' => cvd_config()->version(),
@@ -31,13 +31,13 @@ class BaseInformationController
     }
 
     /**
-     * Get the plugin information.
+     * Build the plugin log file output.
      *
      * @return array
      */
-    protected function getLogOutput()
+    protected function buildLogOutput()
     {
-        if (! $this->shouldDisplayPrivateInformation()) {
+        if ($this->cannotSeePrivateInformation()) {
             return [];
         }
 
@@ -45,12 +45,22 @@ class BaseInformationController
     }
 
     /**
-     * Determine if private information should be shown in the response.
+     * Determine if private information can be seen in the response.
      *
      * @return bool
      */
-    protected function shouldDisplayPrivateInformation()
+    protected function canSeePrivateInformation()
     {
         return isset($_GET['key']) && $_GET['key'] === cvd_config()->platform()->encryption();
+    }
+
+    /**
+     * Determine if private information cannot be seen in the response.
+     *
+     * @return bool
+     */
+    protected function cannotSeePrivateInformation()
+    {
+        return ! $this->canSeePrivateInformation();
     }
 }

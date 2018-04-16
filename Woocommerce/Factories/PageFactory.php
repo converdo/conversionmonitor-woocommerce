@@ -65,6 +65,8 @@ class PageFactory extends BasePageFactory
             return new HomePage();
         } elseif (is_product()) {
             return new ProductPage();
+        } elseif (is_search()) {
+            return new SearchPage();
         } elseif (is_product_category() || is_shop()) {
             return new CategoryPage();
         } elseif (is_cart()) {
@@ -75,8 +77,6 @@ class PageFactory extends BasePageFactory
             return new CheckoutPage();
         } elseif (is_account_page()) {
             return new AccountPage();
-        } elseif (is_search()) {
-            return new SearchPage();
         }
 
         return new SeoPage();

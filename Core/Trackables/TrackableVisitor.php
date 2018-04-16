@@ -119,7 +119,7 @@ class TrackableVisitor implements Renderable
     /**
      * Get whether the visitor is browsing via a proxy.
      *
-     * @return string
+     * @return bool
      */
     public function isProxy()
     {

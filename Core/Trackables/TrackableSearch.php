@@ -14,11 +14,25 @@ class TrackableSearch implements Renderable
     protected $term;
 
     /**
-     * The amount of results.
+     * The page number.
      *
      * @var int
      */
-    protected $results;
+    protected $page;
+
+    /**
+     * The amount of results on the current page.
+     *
+     * @var int
+     */
+    protected $current = 0;
+
+    /**
+     * The total amount of results.
+     *
+     * @var int
+     */
+    protected $count = 0;
 
     /**
      * Set the search term.
@@ -44,26 +58,72 @@ class TrackableSearch implements Renderable
     }
 
     /**
-     * Set the amount of search results.
+     * Set the page number.
      *
-     * @param  int          $results
+     * @param  string       $page
      * @return $this
      */
-    public function setResults($results)
+    public function setPageNumber($page)
     {
-        $this->results = (int) $results;
+        $this->page = (int) $page;
 
         return $this;
     }
 
     /**
-     * Get the amount of search results.
+     * Get the page number.
      *
      * @return string
      */
-    public function results()
+    public function page()
     {
-        return $this->results;
+        return $this->page;
+    }
+
+    /**
+     * Set the amount of results on the current page.
+     *
+     * @param  int          $current
+     * @return $this
+     */
+    public function setPageResults($current)
+    {
+        $this->current = (int) $current;
+
+        return $this;
+    }
+
+    /**
+     * Get the amount of results on the current page.
+     *
+     * @return int
+     */
+    public function pageResults()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Set the total amount of results.
+     *
+     * @param  int          $count
+     * @return $this
+     */
+    public function setTotalResults($count)
+    {
+        $this->count = (int) $count;
+
+        return $this;
+    }
+
+    /**
+     * Get the total amount of results.
+     *
+     * @return int
+     */
+    public function totalResults()
+    {
+        return $this->count;
     }
 
     /**
@@ -73,7 +133,9 @@ class TrackableSearch implements Renderable
     {
         return [
             'te' => $this->term(),
-            'co' => $this->results(),
+            'pa' => $this->page(),
+            'pc' => $this->pageResults(),
+            'co' => $this->totalResults(),
         ];
     }
 }

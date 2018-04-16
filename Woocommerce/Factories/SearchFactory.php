@@ -30,7 +30,9 @@ class SearchFactory extends BaseSearchFactory
     public function build()
     {
         return $this->model
-                    ->setTerm($this->query->query['s'])
-                    ->setResults($this->query->found_posts);
+                    ->setTerm($this->query->get('s'))
+                    ->setPageNumber($this->query->get('paged'))
+                    ->setPageResults($this->query->post_count)
+                    ->setTotalResults($this->query->found_posts);
     }
 }

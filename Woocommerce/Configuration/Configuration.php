@@ -9,6 +9,7 @@ use Converdo\ConversionMonitor\Woocommerce\Factories\CategoryFactory;
 use Converdo\ConversionMonitor\Woocommerce\Factories\CouponFactory;
 use Converdo\ConversionMonitor\Woocommerce\Factories\OrderFactory;
 use Converdo\ConversionMonitor\Woocommerce\Factories\PageFactory;
+use Converdo\ConversionMonitor\Woocommerce\Factories\PaymentGatewayFactory;
 use Converdo\ConversionMonitor\Woocommerce\Factories\ProductFactory;
 use Converdo\ConversionMonitor\Woocommerce\Factories\SearchFactory;
 use WC_ConversionMonitor;
@@ -259,6 +260,22 @@ class Configuration implements PlatformConfigurable
     public function getOrderFactory($order)
     {
         return new OrderFactory($order);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function paymentGateway($gateway)
+    {
+        return $this->getPaymentGatewayFactory($gateway)->call();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPaymentGatewayFactory($gateway)
+    {
+        return new PaymentGatewayFactory($gateway);
     }
 
     /**

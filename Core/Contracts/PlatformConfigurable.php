@@ -7,6 +7,7 @@ use Converdo\ConversionMonitor\Core\Factories\BaseCategoryFactory;
 use Converdo\ConversionMonitor\Core\Factories\BaseCouponFactory;
 use Converdo\ConversionMonitor\Core\Factories\BaseOrderFactory;
 use Converdo\ConversionMonitor\Core\Factories\BasePageFactory;
+use Converdo\ConversionMonitor\Core\Factories\BasePaymentGatewayFactory;
 use Converdo\ConversionMonitor\Core\Factories\BaseProductFactory;
 use Converdo\ConversionMonitor\Core\Factories\BaseVisitorFactory;
 
@@ -201,6 +202,22 @@ interface PlatformConfigurable
      * @return BaseOrderFactory
      */
     public function getOrderFactory($order);
+
+    /**
+     * Get a payment gateway object.
+     *
+     * @param  mixed                $gateway
+     * @return mixed
+     */
+    public function paymentGateway($gateway);
+
+    /**
+     * Get the payment gateway factory instance.
+     *
+     * @param  mixed                $gateway
+     * @return BasePaymentGatewayFactory
+     */
+    public function getPaymentGatewayFactory($gateway);
 
     /**
      * Determine if there is a cart with products.

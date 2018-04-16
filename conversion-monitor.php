@@ -86,7 +86,7 @@ function conversionmonitor_api_order_update($orderId)
  */
 function conversionmonitor_controller()
 {
-    register_rest_route('conversionmonitor', '/ping', [
+    register_rest_route('conversionmonitor', '/information', [
         'methods' => 'GET',
         'callback' => function () {
             $controller = new \Converdo\ConversionMonitor\Woocommerce\Controllers\InformationController();
