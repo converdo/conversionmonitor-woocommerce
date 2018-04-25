@@ -28,10 +28,10 @@ class Configuration implements PlatformConfigurable
      */
     public function enabled($store = null)
     {
-        return $this->user($store)
-            && $this->website($store)
+        return $this->website($store)
             && $this->encryption($store)
             && $this->activated($store)
+            && $this->location($store)
             && WC_ConversionMonitor::enabled()
             && $this->activated;
     }
@@ -63,9 +63,9 @@ class Configuration implements PlatformConfigurable
     /**
      * @inheritDoc
      */
-    public function user($store = null)
+    public function location($store = null)
     {
-        return (string) WC_ConversionMonitor::getUserToken();
+        return (string) WC_ConversionMonitor::getLocation();
     }
 
     /**

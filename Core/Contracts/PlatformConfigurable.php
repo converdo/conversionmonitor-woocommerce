@@ -28,7 +28,7 @@ interface PlatformConfigurable
     public function disabled();
 
     /**
-     * The website token
+     * The website token.
      *
      * @param  string|null      $store
      * @return string|null
@@ -36,7 +36,7 @@ interface PlatformConfigurable
     public function website($store = null);
 
     /**
-     * The encryption token
+     * The encryption token.
      *
      * @param  string|null      $store
      * @return string|null
@@ -44,12 +44,12 @@ interface PlatformConfigurable
     public function encryption($store = null);
 
     /**
-     * The user token
+     * The server location.
      *
      * @param  string|null      $store
      * @return string|null
      */
-    public function user($store = null);
+    public function location($store = null);
 
     /**
      * Determine if the plugin is activated.

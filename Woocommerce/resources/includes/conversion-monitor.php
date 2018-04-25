@@ -12,32 +12,32 @@ class WC_ConversionMonitor extends WC_Integration
     public $form_fields = [];
 
     /**
-     * The User token.
+     * Determine if the plugin is enabled.
      *
      * @var string
      */
     protected static $isEnabled;
 
     /**
-     * The Website token.
+     * The website token.
      *
      * @var string
      */
     protected static $website;
 
     /**
-     * The Encryption token.
+     * The encryption token.
      *
      * @var string
      */
     protected static $encryption;
 
     /**
-     * The User token.
+     * The server location.
      *
      * @var string
      */
-    protected static $user;
+    protected static $location;
 
     /**
      * The attribute options.
@@ -73,11 +73,15 @@ class WC_ConversionMonitor extends WC_Integration
                 'placeholder' => 'EC_',
                 'class' => 'conversionmonitor-input conversionmonitor-input-token',
             ],
-            'conversionmonitor_user' => [
-                'title' => __('User Token', 'conversionmonitor'),
-                'type' => 'text',
-                'placeholder' => 'US_',
-                'class' => 'conversionmonitor-input conversionmonitor-input-token',
+            'conversionmonitor_location' => [
+                'title' => __('Server Location', 'conversionmonitor'),
+                'type' => 'select',
+                'placeholder' => '',
+                'class' => 'conversionmonitor-input',
+                'options' => [
+                    'eu-west-1' => '🌍 eu-west-1',
+                    'eu-west-2' => '🌍 eu-west-2',
+                ],
             ],
             'conversionmonitor_attributes_heading' => [
                 'title' => '<h3 style="cursor:default">' . __('Product Attributes', 'conversionmonitor') . '</h3>',
@@ -130,7 +134,7 @@ class WC_ConversionMonitor extends WC_Integration
 
         static::$encryption = $this->get_option('conversionmonitor_encryption');
 
-        static::$user = $this->get_option('conversionmonitor_user');
+        static::$location = $this->get_option('conversionmonitor_location');
 
         static::$attributes['brand'] = $this->get_option('conversionmonitor_attribute_brand');
 
@@ -181,13 +185,13 @@ class WC_ConversionMonitor extends WC_Integration
     }
 
     /**
-     * Get the user token.
+     * Get the server location.
      *
      * @return string
      */
-    public static function getUserToken()
+    public static function getLocation()
     {
-        return self::$user;
+        return self::$location;
     }
 
     /**

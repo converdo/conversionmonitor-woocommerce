@@ -4,7 +4,7 @@ return [
 
     'name' => 'production',
     'scheme' => 'https',
-    'url' => '//connect.conversionmonitor.com/',
+    'url' => 'conversionmonitor.com/',
     'log_file' => 'conversionmonitor.log',
 
 ];

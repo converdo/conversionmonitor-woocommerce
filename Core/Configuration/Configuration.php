@@ -137,7 +137,9 @@ class Configuration
      */
     public function url($append = null)
     {
-        return "{$this->environment['scheme']}:{$this->environment['url']}{$append}";
+        $subdomain = 'connect.' . cvd_config()->platform->location();
+
+        return "{$this->environment['scheme']}://{$subdomain}.{$this->environment['url']}{$append}";
     }
 
     /**
