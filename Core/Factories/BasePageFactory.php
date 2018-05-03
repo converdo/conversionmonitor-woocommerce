@@ -41,8 +41,26 @@ class BasePageFactory extends AbstractFactory
      */
     protected function handleRequestUrl()
     {
-        $path = current(explode('?', $_SERVER['REQUEST_URI'], 2));
+        if (! isset($_SERVER['HTTP_HOST'])) {
+            return null;
+        }
 
-        return "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}{$path}";
+        $path = current(explode('?', (! empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/'), 2));
+
+        $scheme = $this->isHttpsRequest() ? 'https' : 'http';
+
+        return "{$scheme}://{$_SERVER['HTTP_HOST']}{$path}";
+    }
+
+    /**
+     * Determine if the request is over https.
+     *
+     * @return bool
+     */
+    protected function isHttpsRequest()
+    {
+        return (! empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] == 'https')
+            || (! empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443')
+            || (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
     }
 }
