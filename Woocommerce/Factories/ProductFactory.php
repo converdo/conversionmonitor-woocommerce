@@ -49,7 +49,7 @@ class ProductFactory extends BaseProductFactory
     public function build()
     {
         return $this->model
-                    ->setName($this->product->get_name())
+                    ->setName($this->product->get_title())
                     ->setSku($this->product->get_sku())
                     ->setPrice($this->product->get_price())
                     ->setBrand($this->handleManufacturerString())
@@ -135,8 +135,8 @@ class ProductFactory extends BaseProductFactory
         $categories = [];
 
         // Get the level and name of each available category.
-        foreach (array_filter($this->product->get_category_ids()) as $key => $id) {
-            $category = get_term_by('id', $id, 'product_cat');
+        foreach ((array) wp_get_post_terms($this->product->get_id(), 'product_cat') as $key => $value) {
+            $category = get_term_by('id', $value->term_id, 'product_cat');
 
             $categories[] = [
                 'level' => $category->parent,
@@ -155,6 +155,7 @@ class ProductFactory extends BaseProductFactory
         // Only keep the name of the categories.
         $categories = array_column($categories, 'name');
 
+        // Get the categories.
         return $categories;
     }
 }

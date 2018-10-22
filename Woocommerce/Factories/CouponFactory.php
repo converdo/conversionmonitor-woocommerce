@@ -45,23 +45,22 @@ class CouponFactory extends BaseCouponFactory
      */
     public function build()
     {
-        return $this->model
-                    ->setCoupon($this->coupon->get_code())
-                    ->setAmount($this->cart->get_discount_total())
-                    ->setMinimumCartTotal($this->coupon->get_minimum_amount())
-                    ->setMaximumCartTotal($this->coupon->get_maximum_amount())
-                    ->setFreeShipping($this->coupon->get_free_shipping())
-                    ->setType($this->handleCouponType());
+        $this->model->setFreeShipping($this->coupon->enable_free_shipping());
+
+        $this->handleVersions();
+
+        return $this->model;
     }
 
     /**
      * Get the coupon type.
      *
+     * @param  string           $type
      * @return CouponType
      */
-    protected function handleCouponType()
+    protected function handleCouponType($type)
     {
-        switch (strtolower($this->coupon->get_discount_type())) {
+        switch (strtolower($type)) {
             case 'fixed_product':
                 return new FixedProductType();
             case 'fixed_cart':
@@ -70,6 +69,33 @@ class CouponFactory extends BaseCouponFactory
                 return new PercentageCartType();
             default:
                 return new PercentageProductType();
+        }
+    }
+
+    /**
+     * Set properties for the model in different Woocommerce versions.
+     *
+     * @return void
+     */
+    protected function handleVersions()
+    {
+        global $woocommerce;
+
+        // We're dealing with Woocommerce 3.0.0 or later.
+        if (version_compare($woocommerce->version, '3.0.0', '>=')) {
+            $this->model->setType($this->handleCouponType($this->coupon->get_discount_type()))
+                ->setCoupon($this->coupon->get_code())
+                ->setAmount($this->cart->get_discount_total())
+                ->setMinimumCartTotal($this->coupon->get_minimum_amount())
+                ->setMaximumCartTotal($this->coupon->get_maximum_amount());
+
+            // We're dealing with an older version of Woocommerce.
+        } else {
+            $this->model->setType($this->handleCouponType($this->coupon->discount_type))
+                ->setCoupon($this->coupon->code)
+                ->setAmount($this->cart->discount_cart)
+                ->setMinimumCartTotal($this->coupon->minimum_amount)
+                ->setMaximumCartTotal($this->coupon->maximum_amount);
         }
     }
 }

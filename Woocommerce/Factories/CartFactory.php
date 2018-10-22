@@ -32,14 +32,12 @@ class CartFactory extends BaseCartFactory
      */
     public function build()
     {
-        return $this->model
-                    ->setProducts($this->handleProducts())
-                    ->setTotal($this->cart->get_total('price'))
-                    ->setSubtotal($this->cart->get_subtotal())
-                    ->setShipping($this->cart->get_shipping_total())
-                    ->setDiscount($this->cart->get_discount_total())
-                    ->setTax($this->cart->get_total_tax())
+        $this->model->setProducts($this->handleProducts())
                     ->setCoupons($this->handleCoupons());
+
+        $this->setPrices();
+
+        return $this->model;
     }
 
     /**
@@ -72,5 +70,32 @@ class CartFactory extends BaseCartFactory
         }
 
         return $coupons;
+    }
+
+    /**
+     * Set the product prices.
+     *
+     * @return void
+     */
+    protected function setPrices()
+    {
+        global $woocommerce;
+
+        // We're dealing with Woocommerce 3.0.0 or later.
+        if (version_compare($woocommerce->version, '3.0.0', '>=')) {
+            $this->model->setTotal($this->cart->get_total('price'))
+                        ->setSubtotal($this->cart->get_subtotal())
+                        ->setShipping($this->cart->get_shipping_total())
+                        ->setDiscount($this->cart->get_discount_total())
+                        ->setTax($this->cart->get_total_tax());
+
+            // We're dealing with an older version of Woocommerce.
+        } else {
+            $this->model->setTotal($this->cart->total)
+                        ->setSubtotal($this->cart->subtotal)
+                        ->setShipping($this->cart->shipping_total)
+                        ->setDiscount($this->cart->discount_cart)
+                        ->setTax($this->cart->tax_total);
+        }
     }
 }
